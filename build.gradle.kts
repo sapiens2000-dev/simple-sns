@@ -50,6 +50,13 @@ tasks.jacocoTestReport {
     }
 }
 
+checkstyle {
+    configFile = file("${rootDir}/naver-checkstyle.xml")
+    configProperties["suppressionFile"] = "${rootDir}/naver-checkstyle-suppressions.xml"
+    toolVersion = "9.2"
+}
+
+
 sonar {
     properties {
         property("sonar.projectKey", "sapiens2000-dev_simple-sns")
