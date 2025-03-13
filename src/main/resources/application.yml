@@ -1,14 +1,21 @@
 spring:
+  profiles:
+    default: local
+
   datasource:
-    url: jdbc:mysql://localhost:3306/simplesns
+    url: ${DB_URL}
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: 200306
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      connection-timeout: 5000
+
   jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect
     properties:
       hibernate:
         show-sql: true
         format-sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        default_batch_fetch_size: 100
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
