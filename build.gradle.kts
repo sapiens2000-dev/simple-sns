@@ -51,7 +51,7 @@ tasks.jacocoTestReport {
 }
 
 checkstyle {
-    configFile = file("${rootDir}/naver-checkstyle.xml")
+    configFile = file("${rootDir}/naver-checkstyle-rules.xml")
     configProperties["suppressionFile"] = "${rootDir}/naver-checkstyle-suppressions.xml"
     toolVersion = "9.2"
 }
