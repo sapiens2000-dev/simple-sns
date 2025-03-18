@@ -30,7 +30,7 @@ public class UserService {
 				NotFoundUserException::new
 			));
 	}
-
+	
 	public void validateNickname(String nickname) {
 		userRepository.findByNickname(nickname)
 			.ifPresent(o -> {

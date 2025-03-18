@@ -16,7 +16,7 @@ public class NicknameValidator implements ConstraintValidator<ValidNickname, Str
 
 	@PostConstruct
 	public void init() {
-		forbidden.add("궬궑");
+		forbidden.add("ㅅㅂ");
 	}
 
 	@Override

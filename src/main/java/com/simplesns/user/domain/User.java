@@ -26,6 +26,7 @@ public class User {
 	@Size(min = 2, max = 20)
 	private String nickname;
 
+	@Getter
 	@Column(name = "password", nullable = false)
 	@Size(min = 8, max = 20)
 	private String password;
