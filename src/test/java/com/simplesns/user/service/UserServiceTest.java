@@ -59,6 +59,19 @@ class UserServiceTest {
 			() -> userService.createUser(userCreateDto2));
 	}
 
+	// @Test
+	// @DisplayName("금지된 닉네임인 경우 ForbiddenNicknameException이 발생해야 한다.")
+	// @Transactional
+	// void createUserFailureWithForbiddenNickname() {
+	// 	UserCreateDto userCreateDto = new UserCreateDto(
+	// 		"ㅅㅂ",
+	// 		"12345678"
+	// 	);
+	//
+	// 	assertThrows(ForbiddenNicknameException.class,
+	// 		() -> userService.createUser(userCreateDto));
+	// }
+
 	@Test
 	@DisplayName("유저 정보가 조회되어야 한다.")
 	@Transactional
@@ -69,6 +82,11 @@ class UserServiceTest {
 		);
 
 		userService.createUser(userCreateDto);
+
+		User user = userRepository.findByNickname(userCreateDto.nickname()).orElse(null);
+
+		assertEquals(userCreateDto.nickname(), user.getNickname());
+		assertEquals(userCreateDto.password(), user.getPassword());
 
 	}
 
