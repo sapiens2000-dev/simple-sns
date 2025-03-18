@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
 import com.simplesns.user.UserRepository;
 import com.simplesns.user.domain.User;
@@ -16,7 +15,6 @@ import com.simplesns.user.exception.DuplicateNicknameException;
 import jakarta.transaction.Transactional;
 
 @SpringBootTest
-@ActiveProfiles("test")
 class UserServiceTest {
 
 	@Autowired
@@ -59,19 +57,6 @@ class UserServiceTest {
 			() -> userService.createUser(userCreateDto2));
 	}
 
-	// @Test
-	// @DisplayName("금지된 닉네임인 경우 ForbiddenNicknameException이 발생해야 한다.")
-	// @Transactional
-	// void createUserFailureWithForbiddenNickname() {
-	// 	UserCreateDto userCreateDto = new UserCreateDto(
-	// 		"ㅅㅂ",
-	// 		"12345678"
-	// 	);
-	//
-	// 	assertThrows(ForbiddenNicknameException.class,
-	// 		() -> userService.createUser(userCreateDto));
-	// }
-
 	@Test
 	@DisplayName("유저 정보가 조회되어야 한다.")
 	@Transactional
@@ -83,7 +68,7 @@ class UserServiceTest {
 
 		userService.createUser(userCreateDto);
 
-		User user = userRepository.findByNickname(userCreateDto.nickname()).orElse(null);
+		User user = userRepository.findByNickname(userCreateDto.nickname()).orElseThrow();
 
 		assertEquals(userCreateDto.nickname(), user.getNickname());
 		assertEquals(userCreateDto.password(), user.getPassword());
